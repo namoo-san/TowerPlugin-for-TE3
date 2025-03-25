@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tower Plugin</title>
+    <style>
+        body {
+            text-align: center;
+            margin: 0;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #container {
+            position: absolute;
+            bottom: 0;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            pointer-events: none;
+        }
+
+        .falling-image {
+            position: absolute;
+            width: 100px;
+            height: auto;
+            animation: fall 2s linear forwards;
+        }
+
+        @keyframes fall {
+            from {
+                transform: translateY(-150vh);
+            }
+
+            to {
+                transform: translateY(0);
+            }
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"
+        integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous">
+        </script>
+    <script type="text/javascript">
+
+        window.onload = function () {
+            check();
+        };
+
+        let prevCount = -1;
+
+        function check() {
+            const searchParam = new URLSearchParams(window.location.search);
+
+            if (searchParam.has("command")) {
+                let command = searchParam.get("command");
+                if (command == "add") {
+                    let count = searchParam.get("count") - 0;
+                    prevCount = localStorage.getItem("counter") - 0;
+                    localStorage.setItem("counter", prevCount - 0 + count);
+                } else if (command == "reset") {
+                    localStorage.setItem("counter", 0);
+                }
+            } else {
+                setTimeout(RefreshCounter, 1000);
+            }
+        }
+
+        function RefreshCounter() {
+            let count = localStorage.getItem("counter") - 0;
+            if (prevCount == -1 || count != prevCount) {
+                prevCount = count;
+                dropImage();
+                $("div#viewer").text(count);
+            }
+            setTimeout(RefreshCounter, 1000);
+        }
+    </script>
+</head>
+
+<body>
+    <div id="container"></div>
+    <script>
+        let count = 0;
+        function dropImage() {
+            const container = document.getElementById('container');
+            const img = document.createElement('img');
+            img.src = './image/drop-object.gif';
+            img.classList.add('falling-image');
+            img.style.bottom = `${count * 100}px`;
+            container.appendChild(img);
+
+            setTimeout(() => {
+                img.src = './image/dropped-object.gif';
+            }, 2000);
+
+            count++;
+        }
+    </script>
+</body>
+
+</html>
