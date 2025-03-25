@@ -87,16 +87,26 @@
     <div id="container"></div>
     <script>
         let count = 0;
+        
+        const imageSets = [
+            { drop: './image/drop-object1.gif', dropped: './image/dropped-object1.gif' },
+            { drop: './image/drop-object2.gif', dropped: './image/dropped-object2.gif' },
+            { drop: './image/drop-object3.gif', dropped: './image/dropped-object3.gif' },
+            { drop: './image/drop-object4.gif', dropped: './image/dropped-object4.gif' },
+            { drop: './image/drop-object5.gif', dropped: './image/dropped-object5.gif' }
+        ];
+
         function dropImage() {
             const container = document.getElementById('container');
+            const randomSet = imageSets[Math.floor(Math.random() * imageSets.length)];
             const img = document.createElement('img');
-            img.src = './image/drop-object.gif';
+            img.src = randomSet.drop;
             img.classList.add('falling-image');
             img.style.bottom = `${count * 100}px`;
             container.appendChild(img);
 
             setTimeout(() => {
-                img.src = './image/dropped-object.gif';
+                img.src = randomSet.dropped;
             }, 2000);
 
             count++;
