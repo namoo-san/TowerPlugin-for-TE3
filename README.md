@@ -26,8 +26,10 @@ e.g. TanuEsa3.1.1.1\HTML\Tower Plugin.html
 
 ### かすたまいず
 
-- `たぬえさフォルダ/HTML/image` の中にある
-- `drop-object.png` を任意のファイルに置き換える
+`/image` フォルダに、落下中と落下後の画像をそれぞれ5枚置いておく
+
+- 落下中 `/image/drop-object1.gif`
+- 落下後 `/image/dropped-object1.gif`
 
 ```
 widthは100pxに固定されるからサイズ変えたかったから適当にHTMLを修正してちょんまげ
