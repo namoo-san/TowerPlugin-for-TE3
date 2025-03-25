@@ -35,4 +35,4 @@ widthは100pxに固定されるからサイズ変えたかったから適当にH
 
 ### 過去のりりーすのーと
 - v0.1 - Fixed failed load image (modified image file path)
-- v0.2 - Add feature drop / dropped image switch (with change to gif file)
+- v0.11 - Add feature drop / dropped image switch (with change to gif file)
